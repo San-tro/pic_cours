@@ -7,5 +7,7 @@ namespace pis_c.Models.DBEntities
 {
     public class FuelType
     {
+        public int Id { get; set; }
+        public int Name { get; set; }
     }
 }

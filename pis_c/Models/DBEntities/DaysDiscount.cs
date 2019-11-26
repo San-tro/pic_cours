@@ -7,5 +7,10 @@ namespace pis_c.Models.DBEntities
 {
     public class DaysDiscount
     {
+        public int MinDaysAmmount { get; set; }
+        public int MaxDaysAmmount { get; set; }
+        public double Percent { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }

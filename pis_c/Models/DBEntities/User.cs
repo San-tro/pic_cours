@@ -15,5 +15,7 @@ namespace pis_c.Models.DBEntities
         public string Passport { get; set; }
         public string DriverLicense { get; set; }
         public string Inn { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }
