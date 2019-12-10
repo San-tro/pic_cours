@@ -14,6 +14,7 @@ namespace pis_c.Models.DBSeeders
             for (int i = 0; i < ammount; i++)
                 users[i] = new User()
                 {
+                    Id = i+1,
                     Name = "TESTNAME" + i,
                     Surname = "TESTSURNAME" + i,
                     Patronymic = "TESTPATR" + i,

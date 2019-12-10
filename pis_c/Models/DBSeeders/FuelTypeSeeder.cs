@@ -12,10 +12,10 @@ namespace pis_c.Models.DBSeeders
         {
             return new FuelType[]
             {
-                new FuelType() {Name = "Бензин"},
-                new FuelType() {Name = "Дизель"},
-                new FuelType() {Name = "Электричество"},
-                new FuelType() {Name = "Газ"}
+                new FuelType() {Id = 1, Name = "Бензин"},
+                new FuelType() {Id = 2, Name = "Дизель"},
+                new FuelType() {Id = 3, Name = "Электричество"},
+                new FuelType() {Id = 4, Name = "Газ"}
             };
         }
     }

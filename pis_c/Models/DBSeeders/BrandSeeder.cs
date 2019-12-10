@@ -11,12 +11,12 @@ namespace pis_c.Models.DBSeeders
         public static Brand[] Create()
         {
             return new Brand[] {
-                new Brand() { Name = "Toyota"},
-                new Brand() { Name = "Bmw"},
-                new Brand() {Name = "Audi"},
-                new Brand() {Name = "Kia"},
-                new Brand() {Name = "Hyundai"},
-                new Brand() {Name = "Lada"},
+                new Brand() {Id = 1, Name = "Toyota"},
+                new Brand() {Id = 2, Name = "Bmw"},
+                new Brand() {Id = 3, Name = "Audi"},
+                new Brand() {Id = 4, Name = "Kia"},
+                new Brand() {Id = 5, Name = "Hyundai"},
+                new Brand() {Id = 6, Name = "Lada"},
             };
         }
     }

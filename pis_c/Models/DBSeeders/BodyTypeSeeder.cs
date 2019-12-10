@@ -12,10 +12,10 @@ namespace pis_c.Models.DBSeeders
         {
             return new BodyType[]
             {
-                new BodyType() {Name = "Седан"},
-                new BodyType() {Name = "Универсал"},
-                new BodyType() {Name = "Внедорожник"},
-                new BodyType() {Name = "Хэтчбэк"}
+                new BodyType() {Id = 1, Name = "Седан"},
+                new BodyType() {Id = 2, Name = "Универсал"},
+                new BodyType() {Id = 3, Name = "Внедорожник"},
+                new BodyType() {Id = 4, Name = "Хэтчбэк"}
             };
         }
     }

@@ -5,11 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using pis_c.Models;
+using pis_c.Models.DBEntities;
 
 namespace pis_c.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(AppDbContext dbContext)
+        {
+
+        }
+
         public IActionResult Index()
         {
             return View();

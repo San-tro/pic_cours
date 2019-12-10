@@ -12,9 +12,9 @@ namespace pis_c.Models.DBSeeders
         {
             return new DriveType[]
             {
-                new DriveType {Name = "Полный"},
-                new DriveType {Name = "Передний"},
-                new DriveType {Name = "Задний"}
+                new DriveType {Id = 1, Name = "Полный"},
+                new DriveType {Id = 2, Name = "Передний"},
+                new DriveType {Id = 3, Name = "Задний"}
             };
         }
     }

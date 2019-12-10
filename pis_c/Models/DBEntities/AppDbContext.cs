@@ -49,7 +49,6 @@ namespace pis_c.Models.DBEntities
             modelBuilder.Entity<GearBox>().HasData(GearBoxSeeder.Create());
             modelBuilder.Entity<BodyType>().HasData(BodyTypeSeeder.Create());
             modelBuilder.Entity<CarClass>().HasData(CarClassSeeder.Create());
-            modelBuilder.Entity<DaysDiscount>().HasData(DaysDiscountSeeder.Create());
             modelBuilder.Entity<DriveType>().HasData(DriveTypeSeeder.Create());
             modelBuilder.Entity<FuelType>().HasData(FuelTypeSeeder.Create());
         }

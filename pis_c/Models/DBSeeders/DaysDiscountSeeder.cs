@@ -12,9 +12,9 @@ namespace pis_c.Models.DBSeeders
         {
             return new DaysDiscount[]
             {
-                new DaysDiscount() {MinDaysAmmount = 10, Percent = 5},
-                new DaysDiscount() {MinDaysAmmount = 15, Percent = 7},
-                new DaysDiscount() {MinDaysAmmount = 20, Percent = 10}
+                new DaysDiscount() {Id = 1, MinDaysAmmount = 10, Percent = 5},
+                new DaysDiscount() {Id = 2, MinDaysAmmount = 15, Percent = 7},
+                new DaysDiscount() {Id = 3, MinDaysAmmount = 20, Percent = 10}
             };
         }
     }

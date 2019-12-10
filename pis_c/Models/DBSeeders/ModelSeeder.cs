@@ -12,12 +12,12 @@ namespace pis_c.Models.DBSeeders
         {
             return new Model[]
             {
-                new Model(){ BrandId = 1, Name = "Camry"},
-                new Model(){ BrandId = 2, Name = "320i"},
-                new Model(){ BrandId = 3, Name = "A4"},
-                new Model(){ BrandId = 4, Name = "Rio"},
-                new Model(){ BrandId = 5, Name = "Solaris"},
-                new Model(){ BrandId = 6, Name = "Vesta"},
+                new Model(){Id = 1, BrandId = 1, Name = "Camry"},
+                new Model(){Id = 2, BrandId = 2, Name = "320i"},
+                new Model(){Id = 3, BrandId = 3, Name = "A4"},
+                new Model(){Id = 4, BrandId = 4, Name = "Rio"},
+                new Model(){Id = 5, BrandId = 5, Name = "Solaris"},
+                new Model(){Id = 6, BrandId = 6, Name = "Vesta"},
             };
         }
     }

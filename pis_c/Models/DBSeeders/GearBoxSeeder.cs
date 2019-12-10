@@ -12,10 +12,10 @@ namespace pis_c.Models.DBSeeders
         {
             return new GearBox[]
             {
-                new GearBox(){ Name = "АКПП"},
-                new GearBox(){ Name = "МКПП"},
-                new GearBox(){ Name = "Робот"},
-                new GearBox(){ Name = "Вариатор"}
+                new GearBox(){ Id = 1, Name = "АКПП"},
+                new GearBox(){ Id = 2, Name = "МКПП"},
+                new GearBox(){ Id = 3, Name = "Робот"},
+                new GearBox(){ Id = 4, Name = "Вариатор"}
             };
         }
     }

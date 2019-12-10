@@ -12,11 +12,11 @@ namespace pis_c.Models.DBSeeders
         {
             return new CarClass[]
             {
-                new CarClass {Name = "A"},
-                new CarClass {Name = "B"},
-                new CarClass {Name = "C"},
-                new CarClass {Name = "D"},
-                new CarClass {Name = "E"}
+                new CarClass {Id = 1, Name = "A"},
+                new CarClass {Id = 2, Name = "B"},
+                new CarClass {Id = 3, Name = "C"},
+                new CarClass {Id = 4, Name = "D"},
+                new CarClass {Id = 5, Name = "E"}
             };
         }
     }
