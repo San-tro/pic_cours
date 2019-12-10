@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using pis_c.Models.DBSeeders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,27 @@ namespace pis_c.Models.DBEntities
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=CarRent; Trusted_connection=True");
             base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            Seed(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+        }
+
+        private void Seed(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(UserSeeder.Create(10));
+            modelBuilder.Entity<OrdersDiscount>().HasData(OrdersDiscountSeeder.Create());
+            modelBuilder.Entity<Brand>().HasData(BrandSeeder.Create());
+            modelBuilder.Entity<Model>().HasData(ModelSeeder.Create());
+            modelBuilder.Entity<DaysDiscount>().HasData(DaysDiscountSeeder.Create());
+            modelBuilder.Entity<GearBox>().HasData(GearBoxSeeder.Create());
+            modelBuilder.Entity<BodyType>().HasData(BodyTypeSeeder.Create());
+            modelBuilder.Entity<CarClass>().HasData(CarClassSeeder.Create());
+            modelBuilder.Entity<DaysDiscount>().HasData(DaysDiscountSeeder.Create());
+            modelBuilder.Entity<DriveType>().HasData(DriveTypeSeeder.Create());
+            modelBuilder.Entity<FuelType>().HasData(FuelTypeSeeder.Create());
         }
     }
 }

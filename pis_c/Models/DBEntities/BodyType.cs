@@ -8,7 +8,7 @@ namespace pis_c.Models.DBEntities
     public class BodyType
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public ICollection<Car> Cars { get; set; }
     }
