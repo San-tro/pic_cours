@@ -18,6 +18,7 @@ namespace pis_c.Controllers
 
         public IActionResult Index()
         {
+            var test = "test";
             return View();
         }
 
