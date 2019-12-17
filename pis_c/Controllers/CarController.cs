@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using pis_c.Models.DBEntities;
 using pis_c.ViewModels;
@@ -6,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace pis_c.Controllers
 {
+    [Authorize]
     public class CarController : Controller
     {
         AppDbContext dbContext;
@@ -21,6 +24,8 @@ namespace pis_c.Controllers
 
         public IActionResult All()
         {
+            if (!IsAdmin(HttpContext.User))
+                return RedirectToAction("Index", "Home");
             return View(dbContext.Cars
                 .Where(c => c.DeletedAt == null)
                 .Include(c => c.Model).ThenInclude(m => m.Brand)
@@ -30,6 +35,8 @@ namespace pis_c.Controllers
 
         public IActionResult Add()
         {
+            if (!IsAdmin(HttpContext.User))
+                return RedirectToAction("Index", "Home");
             FillViewBagForAddingCar();
             return View();
         }
@@ -39,6 +46,8 @@ namespace pis_c.Controllers
         [HttpPost]
         public IActionResult Add(CarViewModel model)
         {
+            if (!IsAdmin(HttpContext.User))
+                return RedirectToAction("Index", "Home");
             if (!ModelState.IsValid)
             {
                 FillViewBagForAddingCar();
@@ -52,22 +61,34 @@ namespace pis_c.Controllers
         [HttpGet]
         public IActionResult Edit(int carId)
         {
+            if (!IsAdmin(HttpContext.User))
+                return RedirectToAction("Index", "Home");
+
+            //доделать
             throw new NotImplementedException();
         }
 
         [HttpPost]
         public IActionResult Edit(CarViewModel model, int carId)
         {
+            if (!IsAdmin(HttpContext.User))
+                return RedirectToAction("Index", "Home");
+
+            //доделать
             throw new NotImplementedException();
         }
 
         public IActionResult Delete(int carId)
         {
+            if (!IsAdmin(HttpContext.User))
+                return RedirectToAction("Index", "Home");
+
             dbContext.Cars.FirstOrDefault(c => c.Id == carId).DeletedAt = DateTime.Now;
             dbContext.SaveChanges();
             return RedirectToAction("All");
         }
 
+        [AllowAnonymous]
         public IActionResult GetPhoto(int carId)
         {
             var bytes = dbContext.Photos.FirstOrDefault(ph => ph.CarId == carId).Content;
@@ -126,6 +147,12 @@ namespace pis_c.Controllers
             ViewBag.BodyTypes = dbContext.BodyTypes.ToList();
             ViewBag.DriveTypes = dbContext.DriveTypes.ToList();
             ViewBag.GearBoxes = dbContext.GearBoxes.ToList();
+        }
+
+        private bool IsAdmin(ClaimsPrincipal user)
+        {
+            var email = user.Claims.ElementAt(0).Value;
+            return dbContext.Users.FirstOrDefault(u => u.Email == email).IsAdmin;
         }
     }
 }
