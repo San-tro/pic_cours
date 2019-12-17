@@ -2,7 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <!--Здесть делаем фильтр-->
 </div>
+@foreach (var el in ViewBag.Cars)
+{
+    <div class="row border shadow-lg mt-4">
+        <div class="col-md-4">
+            <img src="~/Car/GetPhoto?carId=@el.Id" class="img-fluid"/>
+        </div>
+        <div class="col-md-4">
+            <ul class="list-unstyled">
+                <li class="text-primary"><h3>@el.Model.Brand.Name @el.Model.Name</h3></li>
+                <li class="text-info">@el.BodyType.Name</li>
+                <li class="text-info">@el.DriveType.Name привод</li>
+                <li class="text-info">@el.GearBox.Name</li>
+            </ul>
+        </div>
+    </div>
+}

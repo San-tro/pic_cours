@@ -33,6 +33,12 @@ namespace pis_c.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            if(dbContext.Users.FirstOrDefault(u => u.Email == model.Email) != null)
+            {
+                ModelState.AddModelError("", "Данный email уже используется");
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 RegisterUser(model);

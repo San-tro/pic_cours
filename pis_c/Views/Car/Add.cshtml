@@ -1,0 +1,200 @@
+﻿@model pis_c.ViewModels.CarViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Добавление авто</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label for="BrandId" class="control-label">Марка</label>
+                <select id="BrandId" class="form-control">
+                    @foreach (var el in ViewBag.Brands)
+                    {
+                        <option value="@el.Id">@el.Name</option>
+                    }
+                </select>
+                @Html.ActionLink("Добавить марку", "Add", "Brand")
+            </div>
+
+            <div class="form-group">
+                <label for="ModelId" class="control-label">Модель</label>
+                <select asp-for="ModelId" class="form-control"></select>
+                <span asp-validation-for="ModelId" class="text-danger"></span>
+                @Html.ActionLink("Добавить модель", "Add", "Brand")
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CarClassId" class="control-label">Класс</label>
+                <select name="CarClassId" id="CarClassId" class="form-control">
+                    @foreach (var el in ViewBag.CarClasses)
+                    {
+                        <option value="@el.Id">@el.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CarClassId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelTypeId" class="control-label">Тип топлива</label>
+                <select name="FuelTypeId" id="FuelTypeId" class="form-control">
+                    @foreach (var el in ViewBag.FuelTypes)
+                    {
+                        <option value="@el.Id">@el.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="FuelTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyTypeId" class="control-label">Тип кузова</label>
+                <select name="BodyTypeId" id="BodyTypeId" class="form-control">
+                    @foreach (var el in ViewBag.BodyTypes)
+                    {
+                        <option value="@el.Id">@el.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="BodyTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DriveTypeId" class="control-label">Тип привода</label>
+                <select name="DriveTypeId" id="DriveTypeId" class="form-control">
+                    @foreach (var el in ViewBag.DriveTypes)
+                    {
+                        <option value="@el.Id">@el.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DriveTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GearBoxId" class="control-label">Тип КПП</label>
+                <select name="GearBoxId" id="GearBoxId" class="form-control">
+                    @foreach (var el in ViewBag.GearBoxes)
+                    {
+                        <option value="@el.Id">@el.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="GearBoxId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label">Стоимость</label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StateNum" class="control-label">Гос номер</label>
+                <input asp-for="StateNum" class="form-control" />
+                <span asp-validation-for="StateNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label">Год выпуска</label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatsAmmount" class="control-label">Количество мест</label>
+                <input asp-for="SeatsAmmount" class="form-control" />
+                <span asp-validation-for="SeatsAmmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EngineVol" class="control-label">Обьем двигателя</label>
+                <input asp-for="EngineVol" class="form-control" />
+                <span asp-validation-for="EngineVol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Power" class="control-label">Мощность двигателя</label>
+                <input asp-for="Power" class="form-control" />
+                <span asp-validation-for="Power" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kilometrage" class="control-label">Пробег</label>
+                <input asp-for="Kilometrage" class="form-control" />
+                <span asp-validation-for="Kilometrage" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="DriverAirbag" /> Поушка безопасности водтеля
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PassangerAirbag" /> Подушка безопасности пассажира
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Abs" /> ABS
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Asc" /> ASC
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Esp" /> ESP
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Climate" /> Климат-контроль
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Ac" /> Кондиционер
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Cruise" /> Круиз-контроль
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Описание</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label">Фото</label>
+                <input asp-for="Photo" class="form-control">
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("BrandId").onchange = (e) => {
+        e.preventDefault();
+        console.log("changed");
+        let id = document.getElementById("BrandId").value;
+        console.log(id);
+        id = encodeURIComponent(id);
+        console.log(id);
+        console.log(window.location.host + '/Model/ModelsHtmlOptions?brandId=' + id)
+        $("#ModelId").load('https://' + window.location.host + '/Model/ModelsHtmlOptions?brandId=' + id);
+        console.log('asdf');
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

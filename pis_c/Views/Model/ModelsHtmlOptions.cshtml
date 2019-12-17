@@ -1,0 +1,8 @@
+﻿@model IEnumerable<pis_c.Models.DBEntities.Model>
+
+@foreach(var el in Model)
+{
+    <option value="@el.Id">
+        @el.Name
+    </option>
+}

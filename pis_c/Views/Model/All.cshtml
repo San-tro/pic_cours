@@ -1,0 +1,39 @@
+﻿@model IEnumerable<pis_c.Models.DBEntities.Model>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>Модели</h1>
+
+<p>
+    <a asp-action="Add">Добавить</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Марка
+            </th>
+            <th>
+                Модель
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Brand.Name
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @Html.ActionLink("Удалить", "Delete", new { modelId = item.Id }) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

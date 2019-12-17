@@ -28,7 +28,7 @@ namespace pis_c.Models.DBEntities
         public int Power { get; set; }
         public int Kilometrage { get; set; }
         public bool Cruise { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         public int CarClassId { get; set; }
         public CarClass CarClass { get; set; }
