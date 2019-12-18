@@ -1,0 +1,79 @@
+﻿@model pis_c.ViewModels.CarOrderModel
+
+@{
+    ViewData["Title"] = "Card";
+    var car = ViewBag.Car;
+}
+
+<h1>@car.Model.Brand.Name @car.Model.Name, @car.Year</h1>
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <img src="~/Car/GetPhoto?carId=@car.Id" class="img-fluid" />
+        <div class="mt-2 mb-4">
+            <div class="row car-info">
+                <div class="col-md-6">
+                    <h6>Двигатель: @car.EngineVol</h6>
+                    <h6>Привод: @car.DriveType.Name</h6>
+                    <h6>Пробег: @car.Kilometrage</h6>
+                    <h6>Коробка: @car.GearBox.Name</h6>
+                    <h6>Abs: @if (car.Abs){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                    <h6>Asc: @if (car.Asc){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                    <h6>Климат-контроль: @if (car.Climate){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                    <h6>Подушка безопасности: @if (car.DriverAirbag){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6>Мощность: @car.Power</h6>
+                    <h6>Кол-во сидений: @car.SeatsAmmount</h6>
+                    <h6>Номер: @car.StateNum</h6>
+                    <h6>Топливо: @car.FuelType.Name</h6>
+                    <h6>Esp: @if (car.Esp){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                    <h6>Ac: @if (car.Ac){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                    <h6>Круиз-контроль: @if (car.Cruise){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                    <h6>Подушка безопасности для пассажиров: @if (car.PassangerAirbag){<span>Присутствует</span>}else{<span>Отсутствует</span>}</h6>
+                </div>
+            </div>
+        </div>
+        <h6>Об автомобиле:</h6>
+        <div class="description text-primary h5">@car.Description</div>
+    </div>
+    <div class="col-xl-3 col-lg-4">
+        <div class="card border-primary">
+            <div class="card-body h5">
+                <form asp-action="Order" enctype="multipart/form-data">
+                    <span class="d-flex justify-content-center mb-2">@car.BodyType.Name класса @car.CarClass.Name</span>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Дата начала аренды</label>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartTime" class="control-label">Время начала аренды</label>
+                        <input asp-for="StartTime" type="time" class="form-control" />
+                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FinishDate" class="control-label">Дата конца аренды</label>
+                        <input asp-for="FinishDate" type="date" class="form-control" />
+                        <span asp-validation-for="FinishDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FinishTime" class="control-label">Время конца аренды</label>
+                        <input asp-for="FinishTime" type="time" class="form-control" />
+                        <span asp-validation-for="FinishTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label">Адрес</label>
+                        <input asp-for="Address" type="text" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <input asp-for="CarId" value="@car.Id" class="form-control d-none" />
+                    <h4>Стоимость р/час:</h4>
+                    <h3 class="d-flex justify-content-center">@car.Cost ₽</h3>
+                    <div class="d-flex justify-content-center form-group">
+                        <input type="submit" value="Заказать" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

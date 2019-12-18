@@ -33,6 +33,57 @@ namespace pis_c.Controllers
                 .ToList());
         }
 
+        public IActionResult Card(int id)
+        {
+            ViewBag.Car = GetCar(id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Order(CarOrderModel model)
+        {
+            if (!ModelState.IsValid || model.StartDateTime > model.FinishDateTime)
+            {
+                ViewBag.Car = GetCar(model.CarId);
+                return View("Card", model);
+            }
+            return RedirectToAction("ConfirmPage", "Car", model);
+        }
+
+        public IActionResult ConfirmPage(CarOrderModel model)
+        {
+            var cost = GetOrderCost(model.CarId, model.StartDateTime, model.FinishDateTime);
+            var userId = dbContext.Users
+                .Where(u => u.Email == User.Claims.ElementAt(0).Value)
+                .First().Id;
+            var order = dbContext.Orders.Add(new Order()
+            {
+                Address = model.Address,
+                DateTime = DateTime.Now,
+                Cost = cost,
+                StartDateTime = model.StartDateTime,
+                FinishDateTimeP = model.FinishDateTime,
+                CarId = model.CarId,
+                UserId = userId,
+            });
+            dbContext.SaveChanges();
+            model.OrderId = dbContext.Orders.Last().Id; // TODO: исправить
+            ViewBag.Cost = cost;
+            ViewBag.Car = GetCar(model.CarId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Confirm(int orderId)
+        {
+            var order = dbContext.Orders
+                .Where(o => o.Id == orderId)
+                .First();
+            order.UserConfirmed = true;
+            dbContext.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult Add()
         {
             if (!IsAdmin(HttpContext.User))
@@ -40,8 +91,6 @@ namespace pis_c.Controllers
             FillViewBagForAddingCar();
             return View();
         }
-
-
 
         [HttpPost]
         public IActionResult Add(CarViewModel model)
@@ -91,8 +140,8 @@ namespace pis_c.Controllers
         [AllowAnonymous]
         public IActionResult GetPhoto(int carId)
         {
-            var bytes = dbContext.Photos.FirstOrDefault(ph => ph.CarId == carId).Content;
-            return File(bytes, "image/jpeg");
+            var bytes = dbContext.Photos.FirstOrDefault(ph => ph.CarId == carId)?.Content;
+            return bytes != null ? File(bytes, "image/jpeg") : null;
         }
 
         private void UploadPhoto(CarViewModel model)
@@ -147,6 +196,28 @@ namespace pis_c.Controllers
             ViewBag.BodyTypes = dbContext.BodyTypes.ToList();
             ViewBag.DriveTypes = dbContext.DriveTypes.ToList();
             ViewBag.GearBoxes = dbContext.GearBoxes.ToList();
+        }
+
+        private Car GetCar(int id)
+        {
+            return dbContext.Cars
+                .Where(car => car.DeletedAt == null && car.Id == id)
+                .Include(car => car.CarClass)
+                .Include(car => car.DriveType)
+                .Include(car => car.FuelType)
+                .Include(car => car.GearBox)
+                .Include(car => car.Photos)
+                .Include(car => car.Model).ThenInclude(m => m.Brand)
+                .Include(car => car.BodyType)
+                .First();
+        }
+
+        private double GetOrderCost(int carId, DateTime startDateTime, DateTime finishDateTime)
+        {
+            var costPerHour = dbContext.Cars
+                .Where(car => car.DeletedAt == null && car.Id == carId)
+                .First().Cost;
+            return (finishDateTime - startDateTime).TotalHours * costPerHour; // TotalHours куда округляет?
         }
 
         private bool IsAdmin(ClaimsPrincipal user)

@@ -23,11 +23,11 @@ namespace pis_c.Models.DBEntities
         public bool Esp { get; set; }
         public bool Climate { get; set; }
         public bool Ac { get; set; }
+        public bool Cruise { get; set; }
         public int SeatsAmmount { get; set; }
         public float EngineVol { get; set; }
         public int Power { get; set; }
         public int Kilometrage { get; set; }
-        public bool Cruise { get; set; }
         public DateTime? DeletedAt { get; set; }
 
         public int CarClassId { get; set; }

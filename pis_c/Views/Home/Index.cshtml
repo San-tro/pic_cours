@@ -7,7 +7,7 @@
 </div>
 @foreach (var el in ViewBag.Cars)
 {
-    <div class="row border shadow-lg mt-4">
+    <a class="row border shadow-lg mt-4 style-none" asp-controller="Car" asp-action="Card" asp-route-id="@el.Id">
         <div class="col-md-4">
             <img src="~/Car/GetPhoto?carId=@el.Id" class="img-fluid"/>
         </div>
@@ -19,5 +19,5 @@
                 <li class="text-info">@el.GearBox.Name</li>
             </ul>
         </div>
-    </div>
+    </a>
 }

@@ -1,0 +1,28 @@
+﻿@model pis_c.ViewModels.CarOrderModel
+
+@{
+    ViewData["Title"] = "ConfirmPage";
+    var car = ViewBag.Car;
+}
+
+<h1>@car.Model.Brand.Name @car.Model.Name, @car.Year</h1>
+<div class="row">
+    <div class="col-xl-12">
+        <img src="~/Car/GetPhoto?carId=@car.Id" class="img-fluid" />
+        <div class="mt-2 mb-4">
+            <div class="row car-info">
+                <h2>Информация о заказе:</h2>
+                <div class="col-md-12">
+                    <h3>Адрес: <span class="text-primary">@Model.Address</span></h3>
+                    <h3>Дата начала аренды: <span class="text-primary">@Model.StartDateTime</span></h3>
+                    <h3>Дата окончания аренды: <span class="text-primary">@Model.FinishDateTime</span></h3>
+                    <h2>Стоимость: <span class="text-primary">@ViewBag.Cost ₽</span></h2>
+                    <form asp-action="Confirm" enctype="multipart/form-data">
+                        <input asp-for="OrderId" value="@Model.OrderId" class="form-control d-none" />
+                        <input type="submit" value="Подтвердить" class="btn btn-primary" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

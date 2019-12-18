@@ -95,7 +95,9 @@ namespace pis_c.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 else
+                {
                     ModelState.AddModelError("", "Пожалуйста, введите корректный логин и пароль");
+                }
             }
             return View(model);
         }
