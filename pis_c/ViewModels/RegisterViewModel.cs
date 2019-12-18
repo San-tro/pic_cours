@@ -18,16 +18,16 @@ namespace pis_c.ViewModels
         [Required(ErrorMessage = "Пожалуйста, укажите фамилию")]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введеите отчество")]
+        [Required(ErrorMessage = "Пожалуйста, введите отчество")]
         public string Patronymic { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введеите ИНН")]
-        public string Inn { get; set; }
+        [Required(ErrorMessage = "Пожалуйста, введите Регистрацию")]
+        public string Registration { get; set; }
 
         [Required(ErrorMessage = "Пожалуйста, введеите номер водительских прав")]
         public string DriverLicense { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введеите серию и номер паспорта")]
+        [Required(ErrorMessage = "Пожалуйста, введите серию и номер паспорта")]
         public string Passport { get; set; }
 
         [DataType(DataType.Date)]
@@ -43,7 +43,7 @@ namespace pis_c.ViewModels
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Пожалуйста, ввдеите подтверждение пароля")]
+        [Required(ErrorMessage = "Пожалуйста, введите подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и подтверждение не совпадают")]
         public string PasswordConfirmation { get; set; }
     }

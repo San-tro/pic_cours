@@ -18,7 +18,7 @@ namespace pis_c.Models.DBEntities
         public string Phone { get; set; }
         public string Passport { get; set; }
         public string DriverLicense { get; set; }
-        public string Inn { get; set; }
+        public string Registration { get; set; }
         public bool IsAdmin { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
