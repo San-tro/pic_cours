@@ -15,6 +15,7 @@
             <div class="form-group">
                 <label for="BrandId" class="control-label">Марка</label>
                 <select id="BrandId" class="form-control">
+                    <option>Выберите брэнд</option>
                     @foreach (var el in ViewBag.Brands)
                     {
                         <option value="@el.Id">@el.Name</option>
