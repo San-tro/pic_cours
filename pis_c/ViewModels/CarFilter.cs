@@ -22,6 +22,7 @@ namespace pis_c.ViewModels
         public float? EngineVol { get; set; }
         public int? Power { get; set; }
         public int? CarClassId { get; set; }
+        public int? BrandId { get; set; }
         public int? ModelId { get; set; }
         public int? FuelTypeId { get; set; }
         public int? BodyTypeId { get; set; }

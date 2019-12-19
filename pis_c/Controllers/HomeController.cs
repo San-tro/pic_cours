@@ -40,6 +40,10 @@ namespace pis_c.Controllers
         [HttpPost]
         public List<CarResponse> Filter(CarFilter model)
         {
+            if (model.BrandId != null && model.ModelId == null)
+            {
+                model.ModelId = dbContext.Models.Where(m => m.BrandId == model.BrandId).First().Id;
+            }
             var cars = dbContext.Cars
                 .Where(car => 
                     car.DeletedAt == null

@@ -71,12 +71,6 @@ namespace pis_c.Controllers
             return PartialView(dbContext.Models.Where(m => m.BrandId == brandId).ToList());
         }
 
-        [HttpPost]
-        public int GetFirstModel(int brandId)
-        {
-            return dbContext.Models.Where(m => m.BrandId == brandId).First().Id;
-        }
-
         private bool IsAdmin(ClaimsPrincipal user)
         {
             var email = user.Claims.ElementAt(0).Value;
