@@ -1,23 +1,272 @@
-﻿@{
+﻿@model pis_c.ViewModels.CarFilter
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
-    <!--Здесть делаем фильтр-->
+    <div class="col-12">
+        <span class="h6 cursor-pointer" data-toggle="collapse" data-target="#filtration" aria-expanded="false" aria-controls="filtration">
+            Фильтры
+        </span>
+    </div>
+    <div class="collapse" id="filtration">
+        <div class="card card-body">
+            <form asp-action="CarFilter" id="CarFilter" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label for="BrandId" class="control-label">Марка</label>
+                        <select id="BrandId" class="form-control">
+                            <option>Выберите марку</option>
+                            @foreach (var el in ViewBag.Brands)
+                            {
+                                <option value="@el.Id">@el.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label for="ModelId" class="control-label">Модель</label>
+                        <select asp-for="ModelId" id="ModelId" class="form-control" onchange="filter()">
+                            <option>Выберите модель</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="CarClassId" class="control-label">Класс</label>
+                        <select name="CarClassId" id="CarClassId" class="form-control" onchange="Filter()">
+                            <option>Выберите класс</option>
+                            @foreach (var el in ViewBag.CarClasses)
+                            {
+                                <option value="@el.Id">@el.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="FuelTypeId" class="control-label">Тип топлива</label>
+                        <select name="FuelTypeId" id="FuelTypeId" class="form-control" onchange="Filter()">
+                            <option>Выберите тип топлива</option>
+                            @foreach (var el in ViewBag.FuelTypes)
+                            {
+                                <option value="@el.Id">@el.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="BodyTypeId" class="control-label">Тип кузова</label>
+                        <select name="BodyTypeId" id="BodyTypeId" class="form-control" onchange="Filter()">
+                            <option>Выберите тип кузова</option>
+                            @foreach (var el in ViewBag.BodyTypes)
+                            {
+                                <option value="@el.Id">@el.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="DriveTypeId" class="control-label">Тип привода</label>
+                        <select name="DriveTypeId" id="DriveTypeId" class="form-control" onchange="Filter()">
+                            <option>Выберите тип привода</option>
+                            @foreach (var el in ViewBag.DriveTypes)
+                            {
+                                <option value="@el.Id">@el.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="GearBoxId" class="control-label">Тип КПП</label>
+                        <select name="GearBoxId" id="GearBoxId" class="form-control" onchange="Filter()">
+                            <option>Выберите тип КПП</option>
+                            @foreach (var el in ViewBag.GearBoxes)
+                            {
+                                <option value="@el.Id">@el.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="Year" class="control-label">Год выпуска</label>
+                        <input asp-for="Year" class="form-control" oninput="Filter()" />
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="SeatsAmmount" class="control-label">Количество мест</label>
+                        <input asp-for="SeatsAmmount" class="form-control" oninput="Filter()" />
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="EngineVol" class="control-label">Обьем двигателя</label>
+                        <input asp-for="EngineVol" class="form-control" type="number" oninput="Filter()" />
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="Power" class="control-label">Мощность двигателя</label>
+                        <input asp-for="Power" class="form-control" oninput="Filter()" />
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label asp-for="CostFrom" class="control-label">Стоимость от</label>
+                        <input asp-for="CostFrom" class="form-control" type="number" oninput="Filter()" />
+                        <label asp-for="CostTo" class="control-label">до</label>
+                        <input asp-for="CostTo" class="form-control" type="number" oninput="Filter()" />
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="DriverAirbag" id="DriverAirbag" oninput="Filter()" /> Подушка безопасности водителя
+                                </label>
+                            </div>
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="PassangerAirbag" id="PassangerAirbag" oninput="Filter()" /> Подушка безопасности пассажира
+                                </label>
+                            </div>
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Abs" id="Abs" oninput="Filter()" /> ABS
+                                </label>
+                            </div>
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Asc" id="Asc" oninput="Filter()" /> ASC
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Esp" id="Esp" oninput="Filter()" /> ESP
+                                </label>
+                            </div>
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Climate" id="Climate" oninput="Filter()" /> Климат-контроль
+                                </label>
+                            </div>
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Ac" id="Ac" oninput="Filter()" /> Кондиционер
+                                </label>
+                            </div>
+                            <div class="form-group form-check col-3">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="Cruise" id="Cruise" oninput="Filter()" /> Круиз-контроль
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-@foreach (var el in ViewBag.Cars)
-{
-    <a class="row border shadow-lg mt-4 style-none" asp-controller="Car" asp-action="Card" asp-route-id="@el.Id">
-        <div class="col-md-4">
-            <img src="~/Car/GetPhoto?carId=@el.Id" class="img-fluid"/>
-        </div>
-        <div class="col-md-4">
-            <ul class="list-unstyled">
-                <li class="text-primary"><h3>@el.Model.Brand.Name @el.Model.Name</h3></li>
-                <li class="text-info">@el.BodyType.Name</li>
-                <li class="text-info">@el.DriveType.Name привод</li>
-                <li class="text-info">@el.GearBox.Name</li>
-            </ul>
-        </div>
-    </a>
-}
+<div id="cars">
+    @foreach (var el in ViewBag.Cars)
+    {
+        <a class="row border shadow-lg mt-4 style-none" asp-controller="Car" asp-action="Card" asp-route-id="@el.Id">
+            <div class="col-md-4">
+                <img src="~/Car/GetPhoto?carId=@el.Id" class="img-fluid" />
+            </div>
+            <div class="col-md-4">
+                <ul class="list-unstyled">
+                    <li class="text-primary"><h3>@el.Model.Brand.Name @el.Model.Name</h3></li>
+                    <li class="text-info">@el.BodyType.Name</li>
+                    <li class="text-info">@el.DriveType.Name привод</li>
+                    <li class="text-info">@el.GearBox.Name</li>
+                </ul>
+            </div>
+        </a>
+    }
+</div>
+
+<script type="text/javascript">
+    document.getElementById("BrandId").onchange = (e) => {
+        e.preventDefault();
+        let id = document.getElementById("BrandId").value;
+        $("#ModelId").load('https://' + window.location.host + '/Model/ModelsHtmlOptions?brandId=' + encodeURIComponent(id));
+        Filter(true); // i love crutches
+    }
+
+    function Filter(loadModel=false) {
+        let model = {};
+        $('#CarFilter').serializeArray().forEach(el => model[el.name] = el.value);
+        fillCheckBoxValues(model);
+        if (loadModel) {
+            $.ajax({
+                url: "/Model/GetFirstModel",
+                type: "POST",
+                data: { brandId: document.getElementById("BrandId").value },
+                dataType: 'json',
+                success: function (modelId) {
+                    model.ModelId = modelId;
+                    sendModel(model);
+                }
+            });
+        } else {
+            sendModel(model);
+        }
+    }
+
+    function fillCheckBoxValues(model) {
+        model.DriverAirbag = $('#DriverAirbag').prop('checked');
+        model.PassangerAirbag = $('#PassangerAirbag').prop('checked');
+        model.Abs = $('#Abs').prop('checked');
+        model.Asc = $('#Asc').prop('checked');
+        model.Esp = $('#Esp').prop('checked');
+        model.Climate = $('#Climate').prop('checked');
+        model.Ac = $('#Ac').prop('checked');
+        model.Cruise = $('#Cruise').prop('checked');
+    }
+
+    function sendModel(model) {
+        $.ajax({
+            url: "/Home/Filter",
+            type: "POST",
+            data: { model: model },
+            dataType: 'json',
+            success: function (data) {
+                let container = $('#cars');
+                container.children().remove();
+                debugger
+                data.forEach(car => {
+                    container.append(`
+                        <a class="row border shadow-lg mt-4 style-none" href="Car/Card/?id=${car.id}">
+                            <div class="col-md-4">
+                                <img src="Car/GetPhoto?carId=${car.id}" class="img-fluid" />
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                                    <li class="text-primary"><h3>${car.brand} ${car.model}</h3></li>
+                                    <li class="text-info">${car.bodyType}</li>
+                                    <li class="text-info">${car.driveType} привод</li>
+                                    <li class="text-info">${car.gearBox}</li>
+                                </ul>
+                            </div>
+                        </a>
+                    `);
+                });
+                if (data.length === 0) {
+                    container.append(`
+                        <h2 class="row">
+                            <div class="col-12 text-muted">
+                                Данные отсутствуют
+                            </div>
+                        </h2>
+                    `);
+                }
+            },
+            error: function(data) {
+                alert(data.responseText);
+            }
+        });
+    }
+
+</script>
