@@ -30,7 +30,7 @@ namespace pis_c.Models.DBEntities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-0KS9H5R; Database=CarRent4; Trusted_connection=True");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database=CarRent; Trusted_connection=True");
             base.OnConfiguring(optionsBuilder);
         }
 
