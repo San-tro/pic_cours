@@ -61,7 +61,7 @@ namespace pis_c.Controllers
                 Password = passwordHasher.GetHash(model.Password),
                 Phone = model.Phone,
                 DriverLicense = model.DriverLicense,
-                Inn = model.Inn,
+                Registration = model.Registration,
                 IsAdmin = false,
                 Passport = model.Passport
             });

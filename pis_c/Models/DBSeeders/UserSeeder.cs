@@ -23,7 +23,7 @@ namespace pis_c.Models.DBSeeders
                     Patronymic = "TESTPATR" + i,
                     Passport = "TESTPASSPORT" + i,
                     DriverLicense = "TESTDL" + i,
-                    Inn = "TESTINN" + i,
+                    Registration = "TESTINN" + i,
                     Phone = "TESTPHONE" + i,
                     IsAdmin = false,
                     Email = "test" + i + "@mail.ru",
