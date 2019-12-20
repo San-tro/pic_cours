@@ -43,11 +43,11 @@ namespace pis_c.Controllers
             if (model.BrandId != null && model.ModelId == null)
             {
                 model.ModelId = dbContext.Models.Where(m => m.BrandId == model.BrandId).First().Id;
-            }
+            } // TODO: SORTING!!!!!
             var cars = dbContext.Cars
                 .Where(car => 
                     car.DeletedAt == null
-                    && ((model.CostFrom == null && model.CostTo == null) || car.Cost <= model.CostFrom && car.Cost >= model.CostTo)
+                    && ((model.CostFrom == null && model.CostTo == null) || car.Cost >= model.CostFrom && car.Cost <= model.CostTo)
                     && (model.Year == null || car.Year == model.Year)
                     && (!model.DriverAirbag || car.DriverAirbag)
                     && (!model.PassangerAirbag || car.PassangerAirbag)

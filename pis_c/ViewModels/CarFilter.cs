@@ -28,5 +28,7 @@ namespace pis_c.ViewModels
         public int? BodyTypeId { get; set; }
         public int? DriveTypeId { get; set; }
         public int? GearBoxId { get; set; }
+        public string SortColumn { get; set; }
+        public string SortRule { get; set; }
     }
 }

@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="row">
+                        <div class="row mx-1">
                             <div class="form-group form-check col-3">
                                 <label class="form-check-label">
                                     <input class="form-check-input" asp-for="DriverAirbag" id="DriverAirbag" oninput="filter()" /> Подушка безопасности водителя
@@ -140,7 +140,7 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="row">
+                        <div class="row mx-1">
                             <div class="form-group form-check col-3">
                                 <label class="form-check-label">
                                     <input class="form-check-input" asp-for="Esp" id="Esp" oninput="filter()" /> ESP
@@ -165,6 +165,34 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-12 mt-2">
+        <span class="h6 cursor-pointer" data-toggle="collapse" data-target="#sorting" aria-expanded="false" aria-controls="sorting">
+            Сортировка
+        </span>
+    </div>
+    <div class="collapse w-100" id="sorting">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <select asp-for="SortColumn" name="SortColumn" id="SortColumn" class="form-control p-0" onchange="filter()">
+                        <option>Параметр сортировки</option>
+                        <option value="cost">Стоимость</option>
+                        <option value="year">Год</option>
+                        <option value="EngineVol">Обьем двигателя</option>
+                        <option value="Power">Мощность двигателя</option>
+                        <option value="Kilometrage">Пробег</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select asp-for="SortRule" name="SortRule" id="SortRule" class="form-control p-0" onchange="filter()">
+                        <option>Правило сортировки</option>
+                        <option value="asc">По возрастанию</option>
+                        <option value="desc">По убыванию</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
