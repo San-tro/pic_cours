@@ -19,8 +19,7 @@ namespace pis_c.Models.DBEntities
         public bool UserConfirmed { get; set; }
         public double Cost { get; set; }
         public DateTime StartDateTime { get; set; }
-        public DateTime FinishDateTimeP { get; set; }
-        public DateTime? FinishDateTimeF { get; set; }
+        public int Days { get; set; }
 
         public int CarId { get; set; }
         public Car Car { get; set; }

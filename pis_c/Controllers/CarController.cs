@@ -42,7 +42,7 @@ namespace pis_c.Controllers
         [HttpPost]
         public IActionResult Order(CarOrderModel model)
         {
-            if (!ModelState.IsValid || model.StartDateTime > model.FinishDateTime)
+            if (!ModelState.IsValid)
             {
                 ViewBag.Car = GetCar(model.CarId);
                 return View("Card", model);
@@ -52,17 +52,21 @@ namespace pis_c.Controllers
 
         public IActionResult ConfirmPage(CarOrderModel model)
         {
-            var cost = GetOrderCost(model.CarId, model.StartDateTime, model.FinishDateTime);
+            var cost = GetOrderCost(model.CarId, model.StartDateTime, model.Days);
+
             var userId = dbContext.Users
                 .Where(u => u.Email == User.Claims.ElementAt(0).Value)
                 .First().Id;
+
+            cost -= -cost * DaysDiscount.GetDiscount(model.Days).Percent / 100 - cost * OrdersDiscount.GetDiscount(model.Days).Percentage / 100;
+
             var order = dbContext.Orders.Add(new Order()
             {
                 Address = model.Address,
                 DateTime = DateTime.Now,
-                Cost = cost,
+                Cost = cost ,
                 StartDateTime = model.StartDateTime,
-                FinishDateTimeP = model.FinishDateTime,
+                Days = model.Days,
                 CarId = model.CarId,
                 UserId = userId,
             });
@@ -212,12 +216,12 @@ namespace pis_c.Controllers
                 .First();
         }
 
-        private double GetOrderCost(int carId, DateTime startDateTime, DateTime finishDateTime)
+        private double GetOrderCost(int carId, DateTime startDateTime, int days)
         {
-            var costPerHour = dbContext.Cars
+            var costPerDay = dbContext.Cars
                 .Where(car => car.DeletedAt == null && car.Id == carId)
                 .First().Cost;
-            return (finishDateTime - startDateTime).TotalHours * costPerHour; // TotalHours куда округляет?
+            return days * costPerDay; // TotalHours куда округляет? очко твое он округляет еблан, аренда посуточная
         }
 
         private bool IsAdmin(ClaimsPrincipal user)

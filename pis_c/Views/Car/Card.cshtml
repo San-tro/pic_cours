@@ -52,14 +52,9 @@
                         <span asp-validation-for="StartTime" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FinishDate" class="control-label">Дата конца аренды</label>
-                        <input asp-for="FinishDate" type="date" class="form-control" />
-                        <span asp-validation-for="FinishDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FinishTime" class="control-label">Время конца аренды</label>
-                        <input asp-for="FinishTime" type="time" class="form-control" />
-                        <span asp-validation-for="FinishTime" class="text-danger"></span>
+                        <label asp-for="Days" class="control-label">Количество дней</label>
+                        <input asp-for="Days" class="form-control" />
+                        <span asp-validation-for="Days" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Address" class="control-label">Адрес</label>
@@ -67,7 +62,7 @@
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <input asp-for="CarId" value="@car.Id" class="form-control d-none" />
-                    <h4>Стоимость р/час:</h4>
+                    <h4>Стоимость р/сутки:</h4>
                     <h3 class="d-flex justify-content-center">@car.Cost ₽</h3>
                     <div class="d-flex justify-content-center form-group">
                         <input type="submit" value="Заказать" class="btn btn-primary" />

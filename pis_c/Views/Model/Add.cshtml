@@ -4,17 +4,16 @@
     ViewData["Title"] = "Add";
 }
 
-<h1>Add</h1>
+<h1>Добавить модель</h1>
 
-<h4>ModelViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Add">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger">Марка</div>
             <div class="form-group">
                 <label asp-for="BrandId" class="control-label"></label>
-                <select name="BrandId" id="BrandId">
+                <select name="BrandId" id="BrandId" class="form-control">
                     @foreach(var el in ViewBag.Brands)
                     {
                         <option value="@el.Id">@el.Name</option>
@@ -23,7 +22,7 @@
                 <span asp-validation-for="BrandId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Название    </label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>

@@ -15,7 +15,7 @@
                 <div class="col-md-12">
                     <h3>Адрес: <span class="text-primary">@Model.Address</span></h3>
                     <h3>Дата начала аренды: <span class="text-primary">@Model.StartDateTime</span></h3>
-                    <h3>Дата окончания аренды: <span class="text-primary">@Model.FinishDateTime</span></h3>
+                    <h3>Количество дней: <span class="text-primary">@Model.Days</span></h3>
                     <h2>Стоимость: <span class="text-primary">@ViewBag.Cost ₽</span></h2>
                     <form asp-action="Confirm" enctype="multipart/form-data">
                         <input asp-for="OrderId" value="@Model.OrderId" class="form-control d-none" />

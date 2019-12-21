@@ -11,9 +11,10 @@ namespace pis_c.Models.DBSeeders
         public static OrdersDiscount[] Create()
         {
             return new OrdersDiscount[] {
-                new OrdersDiscount() {Id = 1, MinDaysAmmount = 10 ,  Percentage = 5},
-                new OrdersDiscount() {Id = 2, MinDaysAmmount = 16,  Percentage = 7},
-                new OrdersDiscount() {Id = 3, MinDaysAmmount = 21, Percentage = 10 }
+                new OrdersDiscount() {Id = 1, MinOrdersAmmount = 0 ,  Percentage = 0},
+                new OrdersDiscount() {Id = 2, MinOrdersAmmount = 10 ,  Percentage = 5},
+                new OrdersDiscount() {Id = 3, MinOrdersAmmount = 16,  Percentage = 7},
+                new OrdersDiscount() {Id = 4, MinOrdersAmmount = 21, Percentage = 10 }
             };
         }
     }
