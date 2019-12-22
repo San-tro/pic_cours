@@ -43,7 +43,7 @@ namespace pis_c.Controllers
             if (model.BrandId != null && model.ModelId == null)
             {
                 model.ModelId = dbContext.Models.Where(m => m.BrandId == model.BrandId).First().Id;
-            } // TODO: SORTING!!!!!
+            }
             var cars = dbContext.Cars
                 .Where(car => 
                     car.DeletedAt == null
@@ -72,21 +72,18 @@ namespace pis_c.Controllers
                 .Include(c => c.Model).ThenInclude(m => m.Brand)
                 .Include(c => c.BodyType)
                 .OrderByDescending(c => c.Id)
-                .ToList();
-            var carsResponse = new List<CarResponse>();
-            foreach(var car in cars) // i love crutches, пришлось так сделать из-за невозможности сериализации
+                .ToList()
+                .Sort(model.SortColumn, model.SortRule);
+            var carsResponse = cars.Select(car => new CarResponse
             {
-                carsResponse.Add(new CarResponse
-                {
-                    Id = car.Id,
-                    DriveType = car.DriveType.Name,
-                    GearBox = car.GearBox.Name,
-                    Model = car.Model.Name,
-                    Brand = dbContext.Brands.Where(x => x.Id == car.Model.BrandId).First().Name,
-                    BodyType = car.BodyType.Name
-                });
+                Id = car.Id,
+                DriveType = car.DriveType.Name,
+                GearBox = car.GearBox.Name,
+                Model = car.Model.Name,
+                Brand = dbContext.Brands.Where(x => x.Id == car.Model.BrandId).First().Name,
+                BodyType = car.BodyType.Name
+            }).ToList();
 
-            }
             return carsResponse;
         }
 

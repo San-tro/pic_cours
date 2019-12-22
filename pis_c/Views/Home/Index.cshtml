@@ -5,19 +5,19 @@
 }
 
 <div class="row">
-    <div class="col-12">
-        <span class="h6 cursor-pointer" data-toggle="collapse" data-target="#filtration" aria-expanded="false" aria-controls="filtration">
-            Фильтры
-        </span>
-    </div>
-    <div class="collapse" id="filtration">
-        <div class="card card-body">
-            <form asp-action="CarFilter" id="CarFilter" enctype="multipart/form-data">
+    <form asp-action="CarFilter" id="CarFilter" enctype="multipart/form-data" class="w-100">
+        <div class="col-12">
+            <span class="h6 cursor-pointer" data-toggle="collapse" data-target="#filtration" aria-expanded="false" aria-controls="filtration">
+                Фильтры
+            </span>
+        </div>
+        <div class="collapse" id="filtration">
+            <div class="card card-body">
                 <div class="row">
                     <div class="form-group col-3">
                         <label asp-for="BrandId" class="control-label">Марка</label>
                         <select name="BrandId" id="BrandId" class="form-control">
-                            <option>Выберите марку</option>
+                            <option value="@null">Выберите марку</option>
                             @foreach (var el in ViewBag.Brands)
                             {
                                 <option value="@el.Id">@el.Name</option>
@@ -28,14 +28,14 @@
                     <div class="form-group col-3">
                         <label for="ModelId" class="control-label">Модель</label>
                         <select asp-for="ModelId" id="ModelId" class="form-control" onchange="filter()">
-                            <option>Выберите модель</option>
+                            <option value="@null">Выберите модель</option>
                         </select>
                     </div>
 
                     <div class="form-group col-3">
                         <label asp-for="CarClassId" class="control-label">Класс</label>
                         <select name="CarClassId" id="CarClassId" class="form-control" onchange="filter()">
-                            <option>Выберите класс</option>
+                            <option value="@null">Выберите класс</option>
                             @foreach (var el in ViewBag.CarClasses)
                             {
                                 <option value="@el.Id">@el.Name</option>
@@ -46,7 +46,7 @@
                     <div class="form-group col-3">
                         <label asp-for="FuelTypeId" class="control-label">Тип топлива</label>
                         <select name="FuelTypeId" id="FuelTypeId" class="form-control" onchange="filter()">
-                            <option>Выберите тип топлива</option>
+                            <option value="@null">Выберите тип топлива</option>
                             @foreach (var el in ViewBag.FuelTypes)
                             {
                                 <option value="@el.Id">@el.Name</option>
@@ -57,7 +57,7 @@
                     <div class="form-group col-3">
                         <label asp-for="BodyTypeId" class="control-label">Тип кузова</label>
                         <select name="BodyTypeId" id="BodyTypeId" class="form-control" onchange="filter()">
-                            <option>Выберите тип кузова</option>
+                            <option value="@null">Выберите тип кузова</option>
                             @foreach (var el in ViewBag.BodyTypes)
                             {
                                 <option value="@el.Id">@el.Name</option>
@@ -68,7 +68,7 @@
                     <div class="form-group col-3">
                         <label asp-for="DriveTypeId" class="control-label">Тип привода</label>
                         <select name="DriveTypeId" id="DriveTypeId" class="form-control" onchange="filter()">
-                            <option>Выберите тип привода</option>
+                            <option value="@null">Выберите тип привода</option>
                             @foreach (var el in ViewBag.DriveTypes)
                             {
                                 <option value="@el.Id">@el.Name</option>
@@ -79,7 +79,7 @@
                     <div class="form-group col-3">
                         <label asp-for="GearBoxId" class="control-label">Тип КПП</label>
                         <select name="GearBoxId" id="GearBoxId" class="form-control" onchange="filter()">
-                            <option>Выберите тип КПП</option>
+                            <option value="@null">Выберите тип КПП</option>
                             @foreach (var el in ViewBag.GearBoxes)
                             {
                                 <option value="@el.Id">@el.Name</option>
@@ -164,37 +164,37 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-    <div class="col-12 mt-2">
-        <span class="h6 cursor-pointer" data-toggle="collapse" data-target="#sorting" aria-expanded="false" aria-controls="sorting">
-            Сортировка
-        </span>
-    </div>
-    <div class="collapse w-100" id="sorting">
-        <div class="card card-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <select asp-for="SortColumn" name="SortColumn" id="SortColumn" class="form-control p-0" onchange="filter()">
-                        <option>Параметр сортировки</option>
-                        <option value="cost">Стоимость</option>
-                        <option value="year">Год</option>
-                        <option value="EngineVol">Обьем двигателя</option>
-                        <option value="Power">Мощность двигателя</option>
-                        <option value="Kilometrage">Пробег</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select asp-for="SortRule" name="SortRule" id="SortRule" class="form-control p-0" onchange="filter()">
-                        <option>Правило сортировки</option>
-                        <option value="asc">По возрастанию</option>
-                        <option value="desc">По убыванию</option>
-                    </select>
+        <div class="col-12 mt-2">
+            <span class="h6 cursor-pointer" data-toggle="collapse" data-target="#sorting" aria-expanded="false" aria-controls="sorting">
+                Сортировка
+            </span>
+        </div>
+        <div class="collapse w-100" id="sorting">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select asp-for="SortColumn" name="SortColumn" id="SortColumn" class="form-control p-0" onchange="filter()">
+                            <option value="@null">Параметр сортировки</option>
+                            <option value="Cost">Стоимость</option>
+                            <option value="Year">Год</option>
+                            <option value="EngineVol">Обьем двигателя</option>
+                            <option value="Power">Мощность двигателя</option>
+                            <option value="Kilometrage">Пробег</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select asp-for="SortRule" name="SortRule" id="SortRule" class="form-control p-0" onchange="filter()">
+                            <option value="@null">Правило сортировки</option>
+                            <option value="asc">По возрастанию</option>
+                            <option value="desc">По убыванию</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 <div id="cars">
     @foreach (var el in ViewBag.Cars)
